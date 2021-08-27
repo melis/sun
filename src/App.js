@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import mongoose from "mongoose";
+import { useEffect } from "react";
+// const mongoose = require("mongoose");
+
+// const Schema = mongoose.Schema;
+// const PokemonSchema = new Schema({
+//   name: { type: String, required: true },
+//   dest: { type: String, required: true },
+// });
+// const Pokemon = mongoose.model("Categories", PokemonSchema);
+
+// console.log(mongoose.Schema);
 
 function App() {
+  useEffect(() => {
+    mongoose
+      .connect(`mongodb+srv://melis:805087@cluster0.dmff2.mongodb.net/sun`)
+      .then(() => {
+        console.log("ok");
+      });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button>Test</button>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.container div {
+  margin: 20px 20px;
+}
+.bg-white button {
+  margin: 10px 10px;
+}

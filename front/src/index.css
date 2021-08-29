@@ -13,3 +13,6 @@ code {
     monospace;
 }
 
+.button:disabled {
+  background-color: gray;
+}

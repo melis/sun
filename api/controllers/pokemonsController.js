@@ -45,7 +45,6 @@ const getPokemonById = async (req, res, next) => {
 
 const createPokemon = async (req, res, next) => {
   const { name, description, image } = req.body;
-
   const createdPokemon = new Pokemon({
     name,
     description,

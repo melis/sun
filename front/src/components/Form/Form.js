@@ -14,7 +14,7 @@ const Form = () => {
       .post("/api/pokemons", {
         name,
         description,
-        imageUrl,
+        image: imageUrl,
       })
       .then((a) => {
         setLoading(false);

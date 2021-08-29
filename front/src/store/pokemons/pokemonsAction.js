@@ -4,7 +4,7 @@ export const getPokemons = () => {
   return (dispatch) => {
     dispatch({ type: "SET_LOADING", loading: true });
     axios
-      .get("http://localhost:5000/api/pokemons")
+      .get("/api/pokemons")
       .then((a) => {
         const { pokemons } = a.data;
         console.log(a.data.pokemons);
@@ -20,7 +20,7 @@ export const addPokemon = (pokemon) => {
   return (dispatch) => {
     dispatch({ type: "SET_ADD_LOADING", addLoading: true });
     axios
-      .post("http://localhost:5000/api/pokemons", pokemon)
+      .post("/api/pokemons", pokemon)
       .then((a) => {
         const { createdPokemon } = a.data;
         dispatch({ type: "ADD_POKEMON", pokemon: createdPokemon });
@@ -29,5 +29,23 @@ export const addPokemon = (pokemon) => {
         console.log(e);
         dispatch({ type: "SET_ADD_LOADING", addLoading: false });
       });
+  };
+};
+
+export const dellPokemon = (id) => {
+  return (dispatch) => {
+    axios.delete(`/api/pokemons/${id}`).then((a) => {
+      console.log(a.data);
+      dispatch({ type: "DELL_POKEMON", id });
+    });
+  };
+};
+
+export const fovPokemon = (id, index) => {
+  return (dispatch) => {
+    axios.put(`/api/pokemons/${id}`).then((a) => {
+      const { pokemon } = a.data;
+      dispatch({ type: "FOV_POKEMON", pokemon });
+    });
   };
 };

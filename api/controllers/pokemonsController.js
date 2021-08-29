@@ -24,6 +24,7 @@ const getPokemons = async (req, res, next) => {
 //--------------------------
 const getPokemonById = async (req, res, next) => {
   const { pid } = req.params;
+  console.log(pid);
   if (!pid) {
     const error = new HttpError(
       "Could not find product for the provided id.",
@@ -44,11 +45,13 @@ const getPokemonById = async (req, res, next) => {
 };
 
 const createPokemon = async (req, res, next) => {
+  console.log("New pokemon:", req.body);
   const { name, description, image } = req.body;
   const createdPokemon = new Pokemon({
     name,
     description,
     image,
+    fov: false,
   });
 
   try {
@@ -67,7 +70,7 @@ const createPokemon = async (req, res, next) => {
 
 const deletePokemon = async (req, res, next) => {
   const { pid } = req.params;
-
+  console.log("Dell Pok Id", pid);
   let pokemon;
   try {
     pokemon = await Pokemon.findById(pid);
@@ -79,7 +82,7 @@ const deletePokemon = async (req, res, next) => {
     return next(error);
   }
 
-  if (!product) {
+  if (!pokemon) {
     const error = new HttpError("Could not find product for this id.", 404);
     return next(error);
   }
@@ -97,7 +100,41 @@ const deletePokemon = async (req, res, next) => {
   res.status(200).json({ message: "Deleted pokemon" });
 };
 
+const addToFov = async (req, res, next) => {
+  const { pid } = req.params;
+  console.log("Fov Pok Id", pid);
+  let pokemon;
+  try {
+    pokemon = await Pokemon.findById(pid);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not delete product.",
+      500
+    );
+    return next(error);
+  }
+
+  if (!pokemon) {
+    const error = new HttpError("Could not find product for this id.", 404);
+    return next(error);
+  }
+
+  try {
+    pokemon.fov = !pokemon.fov;
+    await pokemon.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not fov product.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ pokemon });
+};
+
 exports.getPokemonById = getPokemonById;
 exports.createPokemon = createPokemon;
 exports.deletePokemon = deletePokemon;
 exports.getPokemons = getPokemons;
+exports.addToFov = addToFov;

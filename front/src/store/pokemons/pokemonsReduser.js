@@ -19,6 +19,11 @@ const pokemons = (state = initialState, action) => {
         pokemons: action.pokemons,
         loading: false,
       };
+    case "DELL_POKEMON":
+      return {
+        ...state,
+        pokemons: state.pokemons.filter((el) => el._id !== action.id),
+      };
     case "ADD_POKEMON":
       return {
         ...state,
@@ -29,7 +34,14 @@ const pokemons = (state = initialState, action) => {
       return { ...state, loading: action.loading };
     case "SET_ADD_LOADING":
       return { ...state, addLoading: action.addLoading };
-
+    case "FOV_POKEMON":
+      return {
+        ...state,
+        pokemons: state.pokemons.map((el) => {
+          if (el._id === action.pokemon._id) return action.pokemon;
+          return el;
+        }),
+      };
     default:
       return state;
   }

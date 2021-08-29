@@ -20,9 +20,11 @@ function App() {
     <div className="App container">
       {pokemons.map((el) => (
         <Card
+          id={el._id}
           name={el.name}
           description={el.description}
           image={el.image}
+          fov={el.fov}
           key={el._id}
         />
       ))}

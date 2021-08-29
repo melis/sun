@@ -1,7 +1,7 @@
 const initialState = {
   pokemons: [
     {
-      id: 1,
+      _id: 1,
       name: "n",
       description: "dsdas",
       image:
@@ -9,6 +9,7 @@ const initialState = {
     },
   ],
   loading: false,
+  addLoading: false,
 };
 
 const pokemons = (state = initialState, action) => {
@@ -18,8 +19,16 @@ const pokemons = (state = initialState, action) => {
         pokemons: action.pokemons,
         loading: false,
       };
+    case "ADD_POKEMON":
+      return {
+        ...state,
+        pokemons: [...state.pokemons, action.pokemon],
+        addLoading: false,
+      };
     case "SET_LOADING":
       return { ...state, loading: action.loading };
+    case "SET_ADD_LOADING":
+      return { ...state, addLoading: action.addLoading };
 
     default:
       return state;

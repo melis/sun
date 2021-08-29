@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addPokemon } from "../../store/pokemons/pokemonsAction";
 
 const Form = () => {
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { addLoading } = useSelector((a) => a.pokemons);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
   const handlSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    axios
-      .post("http://localhost:5000/api/pokemons", {
+    dispatch(
+      addPokemon({
         name,
         description,
         image: imageUrl,
       })
-      .then((a) => {
-        setLoading(false);
-        console.log(a.data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+    );
+    setName("");
+    setDescription("");
+    setImageUrl("");
   };
 
   return (
@@ -90,7 +87,7 @@ const Form = () => {
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded button"
-            disabled={loading}
+            disabled={addLoading}
             type="submit"
           >
             Add pokemon

@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getPokemons());
-  }, []);
+  }, [dispatch]);
 
   if (loading) return <div>loading...</div>;
 
@@ -23,7 +23,7 @@ function App() {
           name={el.name}
           description={el.description}
           image={el.image}
-          key={el.id}
+          key={el._id}
         />
       ))}
       <Form />

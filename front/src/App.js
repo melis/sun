@@ -1,33 +1,31 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import Card from "./components/Card/Card";
 
 import Form from "./components/Form/Form";
+import { getPokemons } from "./store/pokemons/pokemonsAction";
 
 function App() {
+  const dispatch = useDispatch();
+  const { pokemons, loading } = useSelector((a) => a.pokemons);
+
+  useEffect(() => {
+    dispatch(getPokemons());
+  }, []);
+
+  if (loading) return <div>loading...</div>;
+
   return (
     <div className="App container">
-      <div className="bg-white rounded shadow border p-6 w-64">
-        <img
-          alt=""
-          src="https://i.pinimg.com/originals/f5/1d/08/f51d08be05919290355ac004cdd5c2d6.png"
+      {pokemons.map((el) => (
+        <Card
+          name={el.name}
+          description={el.description}
+          image={el.image}
+          key={el.id}
         />
-        <h5 className="text-3xl font-bold mb-4 mt-0">Pokemon name</h5>
-        <p className="text-gray-700 text-sm">Pokemon description</p>
-        <button>
-          <img
-            alt=""
-            src="https://image.flaticon.com/icons/png/512/263/263417.png"
-            width="30px"
-          />
-        </button>
-        <button>
-          <img
-            alt=""
-            src="https://image.flaticon.com/icons/png/512/3221/3221897.png"
-            width="30px"
-          />
-        </button>
-      </div>
-
+      ))}
       <Form />
     </div>
   );

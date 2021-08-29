@@ -11,7 +11,7 @@ const Form = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("/api/pokemons", {
+      .post("http://localhost:5000/api/pokemons", {
         name,
         description,
         image: imageUrl,

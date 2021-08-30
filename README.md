@@ -1,6 +1,14 @@
-# sun
+**ТЗ Pokemon Web App
 
-Команда для запуска: docker-compose up
+По задачи надо было с фронта обращатся на базу, но я решил написат back(api) на node и обернуть все это на docker контейнеры и запускат через docker-compose. Создал proxy nginx:alpine и пробросил внутр настройки прокси.
+
+**Frontend**
+React Redux redux-thunk axios
+
+**Backend API**
+NodeJs Express MongoDB Cloud
+
+Команда для запуска: docker-compose up -b
 
 После запуска перейдите на: http://localhost/
 

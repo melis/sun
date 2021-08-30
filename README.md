@@ -8,7 +8,7 @@ React Redux redux-thunk axios
 **Backend API**
 NodeJs Express MongoDB Cloud
 
-Команда для запуска: docker-compose up -b
+Команда для запуска: **docker-compose up -b**
 
 После запуска перейдите на: http://localhost/
 

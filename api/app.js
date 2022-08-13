@@ -40,15 +40,27 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+// mongoose
+//   .connect(
+//     `mongodb+srv://melis:805087@cluster0.dmff2.mongodb.net/sun?retryWrites=true&w=majority`,
+//     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+//   )
+//   .then(() => {
+//     app.listen(PORT);
+//     console.log("Server start on port", PORT);
+//   })
+//   .catch((err) => {
+//     console.log("error", err);
+//   });
+
 mongoose
-  .connect(
-    `mongodb+srv://melis:805087@cluster0.dmff2.mongodb.net/sun?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-  )
+  .connect("mongodb://mongodb:27017", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then(() => {
     app.listen(PORT);
     console.log("Server start on port", PORT);
   })
-  .catch((err) => {
-    console.log("error", err);
-  });
+  .catch((err) => console.log(err));

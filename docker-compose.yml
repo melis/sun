@@ -5,6 +5,8 @@ services:
     build: ./front
     container_name: front
     restart: always
+    links:
+      - api
     depends_on:
       - api
 

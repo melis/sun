@@ -1,8 +1,11 @@
-FROM nginx:alpine
+FROM node:13.12.0-alpine
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /usr/src/app
 
+COPY . .
 
-COPY build .
+RUN npm install
+
+CMD ["npm", "start"]
 
 

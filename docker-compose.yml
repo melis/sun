@@ -4,12 +4,14 @@ services:
   front:
     build: ./front
     container_name: front
+    restart: always
     depends_on:
       - api
 
   api:
     build: ./api
     container_name: api
+    restart: always
     depends_on:
       - mongodb
     links:
@@ -18,6 +20,7 @@ services:
   proxy:
     image: nginx:alpine
     container_name: proxy
+    restart: always
     ports:
       - 80:80
     volumes:
@@ -25,6 +28,7 @@ services:
 
   mongodb:
     image: mongo:5.0
+    restart: always
     ports:
       - 27017:27017
     volumes:

@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -20,6 +20,10 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, DELETE, PUT"
   );
+  res.cookie("rememberme", "1", {
+    expires: new Date(Date.now() + 900000),
+    httpOnly: true,
+  });
   console.log("api");
   next();
 });
@@ -40,18 +44,6 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-// mongoose
-//   .connect(
-//     `mongodb+srv://melis:805087@cluster0.dmff2.mongodb.net/sun?retryWrites=true&w=majority`,
-//     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-//   )
-//   .then(() => {
-//     app.listen(PORT);
-//     console.log("Server start on port", PORT);
-//   })
-//   .catch((err) => {
-//     console.log("error", err);
-//   });
 
 mongoose
   .connect("mongodb://mongodb:27017", {

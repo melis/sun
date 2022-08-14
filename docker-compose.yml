@@ -4,7 +4,12 @@ services:
   front:
     build: ./front
     container_name: front
+    volumes:
+      - ./front:/app
+      - /app/node_modules
     restart: always
+    # ports:
+    #   - 80:3000
     links:
       - api
     depends_on:
@@ -13,6 +18,11 @@ services:
   api:
     build: ./api
     container_name: api
+    # ports:
+    #   - 8080:5000
+    volumes:
+      - ./api:/app
+      - /app/node_modules
     restart: always
     depends_on:
       - mongodb
